@@ -1,0 +1,15 @@
+# Web Servers
+web_server ansible_host=172.16.73.137 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
+
+# DB Server
+db_server ansible_host=172.16.73.135 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
+
+# Application Server
+app_server1 ansible_host=172.16.73.138 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
+#app_server2 ansible_host=172.16.73.134 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
+
+[all:vars]
+repository_path = /home/glopez/Desktop/InstallersICD7.6.1
+tmp_dir = /home/Installers/ICD761
+red_hat_username = gglm92
+red_hat_password = Minombre123

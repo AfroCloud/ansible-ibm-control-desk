@@ -1,0 +1,8 @@
+---
+# vars file for ibm-db2-install
+__tmp_dir:                      "{{ tmp_dir | default('/home/Installers/ICD761') }}"
+__imshared_location:            "{{ imshared_location  | default('/opt/ibm/IBMIMShared') }}"
+__db2_install_location:         "{{ db2_install_location  | default('/opt/ibm/db2/V11.1') }}"
+__tpl_file:                     "installDB2_product.rsp.j2"
+__rsp_file:                     "installDB2_product.xml"
+__iim_install_location:         "{{ iim_install_location  | default('/opt/ibm/InstallationManager') }}"

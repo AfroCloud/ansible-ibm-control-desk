@@ -1,0 +1,9 @@
+---
+# tasks file for red-hat-registration
+-
+  name:                 Register Red Hat
+  redhat_subscription:
+    state:              present
+    username:           '{{ __red_hat_username }}'
+    password:           '{{ __red_hat_password }}'
+    auto_attach:        true

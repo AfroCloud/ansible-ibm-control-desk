@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<agent-input>
+  <variables>
+    <variable name='sharedLocation' value='{{ __imshared_location }}'/>
+  </variables>
+  <server>
+    <repository location='{{ __tmp_dir }}/Install/MWInstallerRepository'/>
+    <repository location='{{ __tmp_dir }}/Install/mwi_madt_DB2AWSv11.1.0.0_images'/>
+  </server>
+  <profile id='IBM   DB2 Advanced Workgroup Server Edition 11.1.0.0' installLocation='{{ __db2_install_location }}'>
+    <data key='cic.selector.arch' value='x86_64'/>
+    <data key='user.createdb2defaultinstance,com.ibm.tivoli.pae.db2' value='false'/>
+    <data key='user.db2textsearch,com.ibm.tivoli.pae.db2' value='true'/>
+    <data key='user.db2adminsgroup,com.ibm.tivoli.pae.db2' value='db2iadm1'/>
+    <data key='user.db2.extract.loc,com.ibm.tivoli.pae.db2' value='/tmp'/>
+  </profile>
+  <install>
+    <!-- IBM  DB2 Advanced Workgroup Server Edition 11.1.0.0 -->
+    <offering profile='IBM   DB2 Advanced Workgroup Server Edition 11.1.0.0' id='com.ibm.tivoli.pae.db2' version='7.6.1.20180719-0029' features='TPAEWin32bitSupport.feature,db2.textSearch.feature'/>
+  </install>
+  <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
+</agent-input>

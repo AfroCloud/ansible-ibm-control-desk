@@ -1,0 +1,7 @@
+---
+# vars file for installation-manager-install
+__tmp_dir: "{{ tmp_dir | default('/home/Installers/ICD761') }}"
+__imshared_location: "{{ imshared_location  | default('/opt/ibm/IBMIMShared') }}"
+__repository_path: "{{ repository_path }}"
+__im_installation_file: agent.installer.lnx.gtk.x86_64_1.8.5.zip
+__iim_install_location: "{{ iim_install_location  | default('/opt/ibm/InstallationManager') }}"

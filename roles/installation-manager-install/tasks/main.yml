@@ -1,0 +1,7 @@
+---
+# tasks file for installation-manager-install
+- 
+  name: Installing IBM Installation Manager
+  command: './installc -acceptLicense -installationDirectory {{ __iim_install_location }}'
+  args:
+    chdir: '{{ __tmp_dir }}/Install/IM/installer.linux.x86_64'

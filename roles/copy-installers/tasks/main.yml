@@ -1,0 +1,29 @@
+---
+# tasks file for copy-installers  
+- 
+  name:             Create directory for installation files
+  file:
+    path:           '{{ __tmp_dir }}'
+    state:          directory
+    mode:           '0755'
+- name:             Copy installation files
+  copy:
+    src:            "{{ __repository_path }}/{{ item }}"
+    dest:           "{{ __tmp_dir }}/{{ item }}"
+    mode:           '0755'
+  with_items:       "{{ __installation_files }}"
+- 
+  name:             Unarchive installation files
+  unarchive:
+    src:            '{{ __tmp_dir }}/{{ item }}'
+    dest:           '{{ __tmp_dir }}'
+    owner:          root
+    group:          root
+    remote_src:     yes
+  with_items:       "{{ __installation_files }}"
+- 
+  name:             Delete installation files
+  file:
+    name:           "{{ __tmp_dir }}/{{ item }}"
+    state:          absent
+  with_items:       "{{ __installation_files }}"

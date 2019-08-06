@@ -1,0 +1,10 @@
+---
+# vars file for ibm-http-server-install
+__tmp_dir:                      "{{ tmp_dir | default('/home/Installers/ICD761') }}"
+__imshared_location:            "{{ imshared_location  | default('/opt/ibm/IBMIMShared') }}"
+__http_install_location:        "{{ http_install_location  | default('/opt/ibm/HTTPServer') }}"
+__plugins_install_location:     "{{ plugins_install_location  | default('/opt/ibm/WebSphere/Plugins') }}"
+__toolbox_install_location:     "{{ toolbox_install_location  | default('/opt/ibm/WebSphere/Toolbox') }}"
+__tpl_file:                     "installHTTP_product.rsp.j2"
+__rsp_file:                     "installHTTP_product.xml"
+__iim_install_location:         "{{ iim_install_location  | default('/opt/ibm/InstallationManager') }}"

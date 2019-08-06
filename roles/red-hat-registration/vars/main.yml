@@ -1,0 +1,4 @@
+---
+# vars file for red-hat-registration
+__red_hat_username: "{{ red_hat_username }}"
+__red_hat_password: "{{ red_hat_password }}"

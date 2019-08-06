@@ -1,0 +1,12 @@
+---
+# vars file for copy-installers
+__repository_path: "{{ repository_path }}"
+__tmp_dir: "{{ tmp_dir | default('/tmp/Installers/ICD761') }}"
+__installation_files:
+  - icd_launchpad_part2_common.tar.tar
+  - launchpad2_761adv_part1.tar.tar
+  - Middl_Inst_DB2_111_Linux_x86-64.tar.gz
+  - Middl_Inst_WAS_90_1of3_Unix.tar.gz
+  - Middl_Inst_WAS_90_2of3_Unix.tar.gz
+  - Middl_Inst_WAS_90_3of3_Unix.tar.gz
+__im_installation_file: agent.installer.lnx.gtk.x86_64_1.8.5.zip

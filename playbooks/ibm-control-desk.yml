@@ -1,0 +1,19 @@
+---
+- name:                     Install IBM Control Desk
+  hosts:                    app_server1
+  roles:
+    - roles/copy-installers
+
+- name:                     Install IBM DB2
+  hosts:                    db_server
+  roles:
+    - roles/red-hat-registration
+    - roles/installation-manager-install
+    - roles/ibm-db2-install
+
+- name:                     Install HTTP Server and Plugins
+  hosts:                    web_server
+  roles:
+    - roles/red-hat-registration
+    - roles/installation-manager-install
+    - roles/ibm-http-server-install
