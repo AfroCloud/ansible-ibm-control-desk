@@ -1,0 +1,670 @@
+############### Begin Standard Header - Do not add comments here ###############
+# Licensed Materials - Property of IBM
+# 
+# 5724-U18
+#
+# (C) Copyright IBM Corp. 2011, 2014  All Rights Reserved.
+#
+# US Government Users Restricted Rights - Use, duplication, or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+############################# End Standard Header ##############################
+
+############################################################
+# Administrative login ID                                  #
+#   This ID should be in lower case                        #
+############################################################
+mxe.adminuserloginid=maxadmin
+
+############################################################
+# Administrative login ID password                         #
+#                                                          #
+############################################################
+mxe.adminPasswd=Tivoli01
+
+############################################################
+# Self-registration user login ID                          #
+#    This ID should be in lower case                       #
+############################################################
+mxe.system.reguser=maxreg
+
+############################################################
+# Self-registration user password                          #
+#                                                          #
+############################################################
+mxe.system.regpassword=Tivoli01
+
+############################################################
+# Integration administrator login ID                       #
+#                                                          #
+############################################################
+mxe.int.dfltuser=mxintadm
+
+############################################################
+# Integration administrator login ID password              #
+#                                                          #
+############################################################
+maximo.int.dfltuserpassword=Tivoli01
+
+##############################################################
+# MADT.NewBaseLang - Specify one language as the base locale for the 
+#     new installation                                      
+#  English en
+#  German  de 
+#  French  fr
+#  Italian  it
+#  Spanish  es
+#  Japanese  ja
+#  Korean  ko
+#  Brazilian Portuguese pt_BR
+#  Simplified Chinese  zh_CN
+#  Swedish  sv
+#  Dutch  nl
+#  Russian  ru
+#  Czech  cs
+#  Hungarian  hu
+#  Polish  pl
+#  Danish  da
+#  Finnish  fi
+#  Norwegian  no
+#  Slovenian  sl
+#  Croatian  hr
+#  Hebrew  he
+#  Arabic  ar 
+#  Turkish  tr 
+#  Slovak  sk                                            #
+############################################################
+MADT.NewBaseLang=en
+
+
+############################################################
+# MADT.NewAddLangs                                         #
+#  Specify one or more additional language codes, separated by     #
+#  commas. If you specify no values, then this system will #
+#  be English only
+#  German  de 
+#  French  fr
+#  Italian  it
+#  Spanish  es
+#  Japanese  ja
+#  Korean  ko
+#  Brazilian Portuguese pt_BR
+#  Simplified Chinese  zh_CN
+#  Swedish  sv
+#  Dutch  nl
+#  Russian  ru
+#  Czech  cs
+#  Hungarian  hu
+#  Polish  pl
+#  Danish  da
+#  Finnish  fi
+#  Norwegian  no
+#  Slovenian  sl
+#  Croatian  hr
+#  Hebrew  he
+#  Arabic  ar 
+#  Turkish  tr 
+#  Slovak  sk                                              #
+############################################################
+MADT.NewAddLangs=
+
+############################################################
+# Email address to receive notifications                   #
+#   Format must be name@hostname                           #
+############################################################
+mxe.adminEmail=
+
+############################################################
+# SMTP server host name                                    #
+#   Fully qualified name or IP address of the SMTP server  #
+############################################################
+mail.smtp.host=
+
+############################################################
+# Product database name                                    #
+#                                                          #
+############################################################
+Database.DB2.DatabaseName=maxdb76
+
+############################################################
+# Fully qualified host name of host that will be used to   #
+# access the database                                      #
+############################################################
+Database.DB2.ServerHostName=db2.gbm.lab
+
+############################################################
+# Instance port number for database connections            #
+#                                                          #
+############################################################
+Database.DB2.ServerPort=50005
+
+############################################################
+# Database user for application                            #
+#                                                          #
+############################################################
+mxe.db.user=maximo
+
+############################################################
+#  Database users password                                 #
+#                                                          #
+############################################################
+mxe.db.password=Tivoli01
+
+############################################################
+#  Schema owner for database tables                        #
+#                                                          #
+############################################################
+mxe.db.schemaowner=maximo
+
+############################################################
+# Name of the table space where indicies will be stored    #
+#                                                          #
+############################################################
+Database.DB2.IndexTablespaceName=MAXINDEX
+
+############################################################
+# Enable DB2 text search                                   #
+# Set a value for the Database.DB2.TextSearchPort          #
+# property if you intend to automatically configure the    #
+# database.                                                #
+############################################################
+Database.DB2.TextSearchEnabled=true
+
+############################################################
+# Enable support for Non-English languages                 #
+#                                                          #
+############################################################
+Database.DB2.Vargraphic=true
+
+############################################################
+# Name of the data table space for database configuration  #
+#                                                          #
+############################################################
+Database.DB2.DataTablespaceName=MAXDATA
+
+
+
+#########################################################################
+#
+# Properties only required if automatedbconfig flag is specified
+#
+#
+#########################################################################
+
+############################################################
+# Port for the IBM DB2 text search service                 #
+#                                                          #
+############################################################
+Database.DB2.TextSearchPort=55000
+
+
+############################################################
+# DB2 initial application control heap size                #
+#                                                          #
+############################################################
+Database.DB2.AppCtlHeapSize=16384
+
+############################################################
+# Db2 initial application heap size                         #
+#                                                          #
+############################################################
+Database.DB2.ApplHeapSize=2048
+
+############################################################
+# DB2 authentication type for the instance                 #
+#                                                          #
+############################################################
+Database.DB2.AuthType=SERVER
+
+############################################################
+# Database buffer pool name for table spaces               #
+#                                                          #
+############################################################
+Database.DB2.BufferPoolName=MAXBUFPOOL
+
+############################################################
+# Database buffer pool size                                #
+#                                                          #
+############################################################
+Database.DB2.BufferPoolSize=4096
+
+############################################################
+# Path where data table space datafiles will be stored     #
+#                                                          #
+############################################################
+Database.DB2.DataTablespaceLocation=CTGDAT
+
+############################################################
+# Initial size for the data table space (MB)               #
+#                                                          #
+############################################################
+Database.DB2.DataTablespaceSize=5000
+
+############################################################
+# Number of pages per extent (group of pages).             #
+#                                                          #
+############################################################
+Database.DB2.ExtentSize=32
+
+############################################################
+# DB2 fenced user.  Required only where DB2 installed on   #
+#  Unix Systems                                            #
+#                                                          #
+############################################################
+#Database.DB2.FencedUser=ctgfenc1
+
+############################################################
+# DB2 fenced user password.  Required only where DB2       #
+# installed on Unix Systems                                #
+#                                                          #
+############################################################
+Database.DB2.FencedUserPassword=Tivoli01
+
+############################################################
+# DB2 fenced user's default group. Required only where DB2 #
+# installed on Unix Systems                                #
+############################################################
+#Database.DB2.FencedGroupName=ctgfgrp1
+
+############################################################
+# Path where index table space datafiles will be stored    #
+#                                                          #
+############################################################
+Database.DB2.IndexTablespaceLocation=CTGDAT
+
+############################################################
+# Index table space size (MB)                              #
+#                                                          #
+############################################################
+Database.DB2.IndexTablespaceSize=5000
+
+############################################################
+# Installation location for DB2 on the remote system       #
+#                                                          #
+############################################################
+Database.DB2.InstallLocation=/opt/ibm/db2/V11.1
+
+############################################################
+# Name of the DB2 instance                                 #
+#                                                          #
+############################################################
+Database.DB2.InstanceName=ctginst1
+
+############################################################
+# Instance owner user password                             #
+#                                                          #
+############################################################
+Database.DB2.InstanceUserPassword=Tivoli01
+
+############################################################
+# Instance administrator group                             #
+#  Required only where DB2 installed on Unix systems       #
+############################################################
+Database.DB2.InstanceAdminGroup=ctgiadm1
+    
+############################################################
+# User name for the database instance administrator        #
+# Required only where DB2 installed on Windows systems     #
+############################################################
+Database.DB2.InstanceAdminUserName=ctginst1
+
+############################################################
+# Database instance administrator password                 #
+# Required only where DB2 installed on Windows systems     #
+############################################################
+#Database.DB2.InstanceAdminPassword=Tivoli01
+
+############################################################
+# DB2 database Locklist parameter setting                  #
+#                                                          #
+############################################################
+Database.DB2.LockListSize=AUTOMATIC
+
+############################################################
+# DB2 transaction log file size                            #
+#                                                          #
+############################################################
+Database.DB2.LogFileSize=8192
+
+############################################################
+# DB2 number of secondary log files                        #
+#                                                          #
+############################################################
+Database.DB2.LogSecond=100
+
+############################################################
+# DB2 Service User user ID                                 #
+# Required only where DB2 installed on Windows systems     #
+############################################################
+#Database.DB2.ServiceUser=db2admin
+
+############################################################
+# Password for the Service User user ID                    #
+#                                                          #
+############################################################
+#Database.DB2.ServicePassword=Tivoli01
+
+############################################################
+# Name of DB2 temporary table space                         #
+#                                                          #
+############################################################
+Database.DB2.TempTablespaceName=MAXTEMP
+
+############################################################
+# Location under the instance directory for the table space#
+# data files                                               #
+############################################################
+Database.DB2.TempTablespaceLocation=CTGTMP
+
+############################################################
+# Temporary table space size (MB)                           #
+#                                                          #
+############################################################
+Database.DB2.TempTablespaceSize=1000
+
+############################################################
+# Administrative user used to configure DB2                #
+#                                                          #
+############################################################
+Database.RemoteAccessUserName=root
+
+############################################################
+# DB2 database server remote access user name               #
+#                                                          #
+############################################################
+Database.RemoteAccessPassword=Tivoli01
+
+
+
+############################################################
+#                   WebSphere J2EE Configuration           #
+#                                                          #
+#                                                          #
+#                                                          #
+#                                                          #
+#                                                          #
+############################################################
+
+############################################################
+# Deployment manager cell name                             #
+#                                                          #
+############################################################
+WAS.CellName=ctgCell01
+
+############################################################
+# SOAP port for the deployment manager                     #
+#                                                          #
+############################################################
+WAS.SOAPConnectorPort=8879
+
+############################################################
+# Host name of the system running WebSphere                #
+# Application Server Deployment Manager                    #
+############################################################
+WAS.DeploymentManagerHostName=app01.gbm.lab
+
+############################################################
+# Administrative user for WebSphere Application Server     #
+# Deployment Manager                                       #
+############################################################
+WAS.AdminUserName=wasadmin
+
+#############################################################
+# WebSphere Application Server administrative user password #
+#                                                           #
+#############################################################
+WAS.AdminPassword=Tivoli01
+
+############################################################
+# Set this to true to have product application             #
+# EAR files deployed into a cluster                        #
+############################################################
+WAS.UseClustersForDeploy=false
+
+############################################################
+# Name of the application server running the application   #
+# Do not set this if WAS.UseClustersForDeploy=true         #
+############################################################
+WAS.ApplicationServerName=MXServer
+
+############################################################
+# Name of the node that is running the application server  #
+# Do not set this if WAS.UseClustersForDeploy=true         #
+############################################################
+WAS.NodeName=ctgNode01
+
+###############################################################
+# Name of the WebSphere Application Server Deployment Manager #
+# topology JSON file                                          #
+# Required if WAS.UseClustersForDeploy=true                   #
+###############################################################
+#WAS.DeploymentTopologyInputFile=c:\\IBM\\SMP\\ConfigTool\\samples\\FourClusterTopologyWithJMS.json
+
+##############################################################
+# Fully qualified host name where the HTTP Server is located # 
+#                                                            #
+##############################################################
+WAS.WebServerHostName=http.gbm.lab
+
+############################################################
+# The name of the webserver object in the WebSphere        #
+# Application Server admin console for managing webserver  #
+# Not required if deploying into clusters                  #
+############################################################
+WAS.WebServerName=webserver1
+
+############################################################
+# Name of the virtual host object in WebSphere Application #
+# Server                                                   #
+# Not required if deploying into clusters                  #
+############################################################
+WAS.VirtualHost=maximo_host
+
+############################################################
+# The webserver listener port for requests for the         #
+# application                                              #
+# Not required if deploying into clusters                  #
+############################################################
+WAS.VirtualHostPort=80
+
+
+##############################################################################
+# Create users in the WebSphere Virtual Member                               #         
+# Manager during configuration.                                              #
+# By default users must already exist in WebSphere Virtual Member Manager    #
+##############################################################################
+WAS.VmmFullyAutomatedConfig=false
+
+
+############################################################
+# Relative Distinguished Name used to store                #
+# Virtual Member Manager groups                            #
+#                                                          #
+############################################################
+WAS.VmmGroupRDN=o=defaultWIMFileBasedRealm 
+
+############################################################
+# Relative Distinguished Name used to store                #
+# LDAP users                                               #
+#                                                          #
+############################################################
+WAS.VmmUserRDN=o=defaultWIMFileBasedRealm 
+
+####################################################################
+# The name of the Service Integration Bus that will contain        #   
+# the Maximo Enterprise Adapter JMS queues and service integration #
+# bus destinations                                                 #
+# Not used when setting up environment for clustering              #
+####################################################################
+WAS.SibName=intjmsbus
+
+#########################################################################
+#
+# Properties only required if automatej2eeconfig flag is specified
+#
+#
+#########################################################################
+
+
+############################################################
+# Set to true if the SIB is being created and you want to  #
+# store messages backed by a DB2 database
+# Not used when setting up environment for clustering      #
+############################################################
+WAS.SibPersistMessages=false
+
+############################################################
+# High message count for the service integration bus       #
+# Not used when setting up environment for clustering      #
+############################################################
+WAS.SibHiMsg=500000
+
+
+
+#########################################################################
+#
+# Properties only required if WAS.SibPersistMessages is set to true
+# If you are using clusters these values will be set in the Deployment
+# Topology JSON input file specified in the property 
+# WAS.DeploymentTopologyInputFile
+#
+#########################################################################
+
+#************************************************************************************************
+#** Contains JSON definition of deployment topology
+#************************************************************************************************
+WAS.DeploymentTopology={"DeploymentServers":[{"busdefinition_ref":0,"server_name":"MXServer","node_name":"ctgNode01","applications":[{"application_name":"MAXIMO","integration_enabled":"true","application_type":"MaximoApplication","functions_supported":"UI|MIF|CRON|REPORT","webserver":"webserver1","virtualhost":"maximo_host"}]}],"ServiceIntegrationBusDefinitions":[{"WAS.SibName":"intjmsbus","WAS.SibDSName":"MXServer_ds","WAS.SibPersistMessages":"false"}]}
+
+############################################################
+# The installation location for WebSphere on the deployment#
+# manager                                                  #
+############################################################
+#WAS.InstallLocation=C:\\Program Files\\IBM\WebSphere\\AppServer
+
+############################################################
+# Operating system user for downloading the key store file #
+#                                                          #
+############################################################
+#WAS.RemoteAccessUserName=Administrator
+
+############################################################
+# Operating system user password                           #
+#                                                          #
+############################################################
+#WAS.RemoteAccessPassword=
+
+############################################################
+# Profile name for WebSphere deployment manager            #
+#                                                          #
+############################################################
+#WAS.DeploymentManagerProfileName=ctgDmgr01
+
+############################################################
+# Directory where deployment manager profile resides       #
+#                                                          #
+############################################################
+#WAS.DeploymentManagerProfileRoot=c:\\Program Files\\IBM\\WebSphere\\AppServer\\profiles\\ctgDmgr01
+
+
+#############################################################
+# Name of the datasource in WebSphere Application Server to #
+# access the integration bus database datastore.            #
+# Used if WAS.SibPersistMessages                            #
+# is set to true                                            #
+#############################################################
+#WAS.SibDSName=intjmsds
+
+############################################################
+# Name of the DB2 Instance for the service integration     #
+# bus DB2 datastore                                        #
+#                                                          #
+############################################################
+#WAS.SibDBInstance=db2inst1
+
+############################################################
+# DB2 instance user password for the service integration   #
+# bus DB2 datastore                                        #
+#                                                          #
+############################################################
+#WAS.SibDBInstancePassword=Tivoli01
+
+
+############################################################
+# Host name where the DB2 service integration bus          #
+# datastore Instance is located.                           #
+#                                                          #
+############################################################
+#WAS.SibDBServerName=localhost
+
+############################################################
+# Name of the database that will contain the message data  #
+#                                                          #
+############################################################
+#WAS.SibDBName=wassibdb
+
+
+############################################################
+# DB2 instance port for the                                # 
+# service integration bus datastore.                       #
+#                                                          #
+############################################################
+#WAS.SibDBServerPort=50000
+
+############################################################
+# DB2 database user for service integration bus datastore. #
+#                                                          #
+#                                                          #
+############################################################
+#WAS.SibDBUserName=sibdbusr
+
+############################################################
+# Password for DB2 service integration bus datastore user  #                                                          #
+#                                                          #
+############################################################
+#WAS.SibDBUserPass=Tivoli01
+
+############################################################
+# DB2 installation location on the system where the service#
+#integration bus database instance is located              #
+#                                                          #
+############################################################
+#WAS.SibDBInstallDir=c:\\Program Files\\IBM\\SQLLIB
+
+############################################################
+# DB2 fenced user.  Required only where DB2 installed on   #
+#  Unix Systems                                            #
+#                                                          #
+############################################################
+#WAS.SibDbFencedUser=db2fenc1
+
+############################################################
+# DB2 fenced user password  Required only where DB2        #
+# installed on Unix Systems                                #
+#                                                          #
+############################################################
+#WAS.SibDbFencedPassword=Tivoli01
+
+############################################################
+# DB2 instance administrator user                          #
+#                                                          #
+############################################################
+#WAS.SibDbInstanceAdminUser=db2admin
+
+############################################################
+# DB2 instance administrator password                      #
+#                                                          #
+############################################################
+#WAS.SibDbInstanceAdminPassword=Tivoli01
+
+############################################################
+# User ID used to access the remote system used to create  #
+# the service integration bus Instance                     #
+#                                                          #
+############################################################
+#WAS.SibDbRemoteAccessUser=Administrator
+
+############################################################
+# Password of the remote access user                       #
+#                                                          #
+############################################################
+#WAS.SibDbRemoteAccessPassword=Tivoli01
+

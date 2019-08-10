@@ -1,0 +1,52 @@
+---
+# tasks file for ibm-was-server-install
+- name:             Disable SELinux
+  selinux:
+    state:          disabled
+- 
+  name:             Insert data to ulimit
+  blockinfile:
+    path:           /etc/security/limits.conf 
+    block: |
+      *         hard    nofile      999999
+      *         soft    nofile      999999
+      root      hard    nofile      999999
+      root      soft    nofile      999999
+- 
+  name:             Reboot to apply changes
+  reboot:
+- 
+  name:             Install prerequisites
+  yum:
+    name:           "{{ item }}"
+    state:          latest
+  loop:
+    - 'nss-softokn-freebl.x86_64'
+    - 'nss-softokn-freebl.i686'
+    - 'glibc.x86_64'
+    - 'glibc.i686'
+    - 'libgcc.x86_64'
+    - 'libgcc.i686'
+    - 'ksh'
+- 
+  name:             Generate Response file
+  template:
+    src:            "{{ __tpl_file }}"
+    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
+    mode:           '0755'
+- 
+  name:             Installing IBM WAS Server
+  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log wasfile -acceptLicense'
+  args:
+    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
+- 
+  name:             Generate Response file for WAS configuration
+  template:
+    src:            "{{ __cfg_tpl_file }}"
+    dest:           "{{ __tmp_dir }}/{{ __cfg_rsp_file }}"
+    mode:           '0755'
+- 
+  name:             WAS configuration 
+  command:          './reconfigurePae.sh -action deployMiddlewareConfiguration -inputfile {{ __tmp_dir }}/{{ __cfg_rsp_file }}'
+  args:
+    chdir:          "{{ __smp_install_location }}/ConfigTool/scripts/"

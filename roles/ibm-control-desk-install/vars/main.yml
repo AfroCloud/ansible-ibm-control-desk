@@ -1,0 +1,11 @@
+---
+# vars file for ibm-control-desk-install
+__tmp_dir:                      "{{ tmp_dir | default('/home/Installers/ICD761') }}"
+__imshared_location:            "{{ imshared_location  | default('/opt/ibm/IBMIMShared') }}"
+__was_install_location:         "{{ was_install_location  | default('/opt/ibm/WebSphere/AppServer') }}"
+__smp_install_location:         "{{ smp_install_location  | default('/opt/ibm/SMP') }}"
+__tpl_file:                     "installICD761_product.rsp.j2"
+__rsp_file:                     "installICD761_product.xml"
+__iim_install_location:         "{{ iim_install_location  | default('/opt/ibm/InstallationManager') }}"
+__cfg_tpl_file:                 "configICD761.rsp.j2"
+__cfg_file:                     "configICD761.properties"

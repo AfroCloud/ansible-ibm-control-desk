@@ -1,15 +1,14 @@
 # Web Servers
-web_server ansible_host=172.16.73.137 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
+web_server ansible_host=<change-ip> ansible_connection=ssh ansible_user=<change-user> ansible_ssh_pass=<change-password>
 
 # DB Server
-db_server ansible_host=172.16.73.135 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
+db_server ansible_host=<change-ip> ansible_connection=ssh ansible_user=<change-user> ansible_ssh_pass=<change-password>
 
 # Application Server
-app_server1 ansible_host=172.16.73.138 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
-#app_server2 ansible_host=172.16.73.134 ansible_connection=ssh ansible_user=root ansible_ssh_pass=Tivoli01
+app_server1 ansible_host=<change-ip> ansible_connection=ssh ansible_user=<change-user> ansible_ssh_pass=<change-password>
 
 [all:vars]
-repository_path = /home/glopez/Desktop/InstallersICD7.6.1
-tmp_dir = /home/Installers/ICD761
-red_hat_username = gglm92
-red_hat_password = Minombre123
+repository_path = <path-where-your-installers-are>
+tmp_dir = <path-shared-between-servers>
+red_hat_username = red-hat-username
+red_hat_password = red-hat-password

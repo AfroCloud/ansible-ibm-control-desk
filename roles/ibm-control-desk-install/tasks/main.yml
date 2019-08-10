@@ -1,0 +1,28 @@
+---
+# tasks file for ibm-control-desk-install
+- 
+  name:             Generate Response file
+  template:
+    src:            "{{ __tpl_file }}"
+    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
+- 
+  name:             Installing IBM Control Desk
+  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log icdfile -acceptLicense'
+  args:
+    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
+- 
+  name:             Generate Response file for Control Desk Configuration
+  template:
+    src:            "{{ __cfg_tpl_file }}"
+    dest:           "{{ __tmp_dir }}/{{ __cfg_file }}"
+- 
+  name:             Deploying IBM Control Desk on WAS
+  command:          './reconfigurePae.sh -action deployConfiguration -inputfile {{ __tmp_dir }}/{{ __cfg_file }} -dbvendor DB2 -j2eevendor WebSphere -automatedbconfig -automatej2eeconfig -buildears'
+  args:
+    chdir:          '{{ __smp_install_location }}/ConfigTool/scripts/'
+-
+  name:             Modify wsadmin.sh
+  replace:
+    path:           "{{ __was_install_location }}/bin/wsadmin.sh"
+    regexp:         'Xmx256m'
+    replace:        'Xmx8192m'

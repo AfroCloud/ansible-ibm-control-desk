@@ -1,7 +1,7 @@
 ---
 # tasks file for ibm-http-server-install
 - 
-  name:             Generate Response file
+  name:             Generate Response file for Http installation
   template:
     src:            "{{ __tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
@@ -11,3 +11,14 @@
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
+- 
+  name:             Generate Response file for Plugin creation
+  template:
+    src:            "{{ __plugin_tpl_file }}"
+    dest:           "{{ __tmp_dir }}/{{ __plugin_rsp_file }}"
+    mode:           '0755'
+- 
+  name:             Creating Plugin
+  command:          './wctcmd.sh -tool pct -defLocPathname {{ __plugins_install_location }} -defLocName {{ __def_loc_name_plugin }} -response {{ __tmp_dir }}/{{ __plugin_rsp_file }}'
+  args:
+    chdir:          '{{ __plugins_install_location }}/Toolbox/WCT/'

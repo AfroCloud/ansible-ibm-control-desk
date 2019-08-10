@@ -17,3 +17,15 @@
     - roles/red-hat-registration
     - roles/installation-manager-install
     - roles/ibm-http-server-install
+
+- name:                     Install WAS Server
+  hosts:                    app_server1
+  roles:
+    - roles/red-hat-registration
+    - roles/installation-manager-install
+    - roles/ibm-was-server-install
+
+- name:                     Install Control Desk
+  hosts:                    app_server1
+  roles:
+    - roles/ibm-control-desk-install

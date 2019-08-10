@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<agent-input>
+  <variables>
+    <variable name='sharedLocation' value='{{ __imshared_location }}'/>
+  </variables>
+  <server>
+    <repository location='{{ __tmp_dir }}/Install/ControlDeskRepo'/>
+    <repository location='{{ __tmp_dir }}/Install/MWInstallerRepository'/>
+    <repository location='{{ __tmp_dir }}/Install/ServiceProviderRepo/ServiceProviderInstallerRepository.zip'/>
+  </server>
+  <profile id='IBM   Tivoli&apos;s process automation suite' installLocation='{{ __smp_install_location }}'>
+    <data key='cic.selector.arch' value='x86_64'/>
+    <data key='user.productName,com.ibm.tivoli.pae.j2ee' value='IBM  Tivoli&apos;s process automation suite configuration tool for WebSphere Application Server'/>
+    <data key='user.j2ee.installLocation,com.ibm.tivoli.pae.j2ee' value='{{ __smp_install_location }}'/>
+    <data key='user.was.installLocation,com.ibm.tivoli.pae.j2ee' value='{{ __was_install_location }}'/>
+    <data key='user.productVersion,com.ibm.tivoli.pae.j2ee' value='9.0.7.20180302_0440'/>
+    <data key='user.partialUninstallMsg' value='Partial uninstall of this component is not supported.'/>
+    <data key='user.TpaeWasInstalled' value='false'/>
+    <data key='user.TpaeWasInstalling' value='false'/>
+    <data key='user.ServiceProviderName,com.ibm.tivoli.tpae.IS.ServiceProvider' value='ServiceProvider'/>
+    <data key='user.ServiceProviderVersion,com.ibm.tivoli.tpae.IS.ServiceProvider' value='7.6.3020.20180731_0603'/>
+    <data key='user.TpaeBaseProductName' value='tpae_base'/>
+    <data key='user.TPAECurrentVersion' value='tpae_base'/>
+    <data key='user.TPAEPreviousVersion' value='0'/>
+    <data key='user.TPAEInstAction' value='install'/>
+    <data key='user.TPAEUninstSetting' value='any'/>
+  </profile>
+  <install>
+    <!-- IBM Control Desk 7.6.1 -->
+    <offering profile='IBM   Tivoli&apos;s process automation suite' id='com.ibm.tivoli.tpae.base.icd.adv.main' version='7.6.110.5319' features='TPAEWin32bitSupport.feature,main.feature,java.feature,help.feature,configTool.feature'/>
+    <!-- IBM Maximo for Service Providers 7.6.3.2 -->
+    <offering profile='IBM   Tivoli&apos;s process automation suite' id='com.ibm.tivoli.tpae.IS.ServiceProvider' version='7.6.3020.20180731_0603' features='main.feature'/>
+  </install>
+  <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
+</agent-input>

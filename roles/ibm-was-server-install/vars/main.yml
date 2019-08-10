@@ -1,0 +1,11 @@
+---
+# vars file for ibm-was-server-install
+__tmp_dir:                      "{{ tmp_dir | default('/home/Installers/ICD761') }}"
+__imshared_location:            "{{ imshared_location  | default('/opt/ibm/IBMIMShared') }}"
+__was_install_location:         "{{ was_install_location  | default('/opt/ibm/WebSphere/AppServer') }}"
+__smp_install_location:         "{{ smp_install_location  | default('/opt/ibm/SMP') }}"
+__tpl_file:                     "installWAS_product.rsp.j2"
+__rsp_file:                     "installWAS_product.xml"
+__iim_install_location:         "{{ iim_install_location  | default('/opt/ibm/InstallationManager') }}"
+__cfg_tpl_file:                 "cfg-silent-linux.rsp.j2"
+__cfg_rsp_file:                 "cfg-silent-linux.properties"
