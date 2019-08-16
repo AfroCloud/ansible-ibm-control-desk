@@ -1,0 +1,4 @@
+#AdminApp.install('{{ __smp_install_location }}/maximo/deployment/default/maximo.ear',['-MapWebModToVH', [['.*', '.*', 'maximo_host']], '-MapModulesToServers', [['.*', '.*', 'WebSphere:cell=ctgCell01,node=ctgNode01,server=MXServer']]])
+AdminApp.install('{{ __smp_install_location }}/maximo/deployment/default/maximo.ear',['-MapWebModToVH', [['.*', '.*', 'maximo_host']], '-MapModulesToServers', [['.*', '.*', 'WebSphere:cell=ctgCell01,node=ihsnode,server=webserver1+WebSphere:cell=ctgCell01,node=ctgNode01,server=MXServer']]])
+# Save the changes
+AdminConfig.save()

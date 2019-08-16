@@ -1,16 +1,16 @@
 ---
 # tasks file for ibm-http-server-install
-#- 
-#  name:             Generate Response file for Http installation
-#  template:
-#    src:            "{{ __tpl_file }}"
-#    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
-#    mode:           '0755'
-#- 
-#  name:             Installing IBM HTTP Server and Plugins
-#  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
-#  args:
-#    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
+- 
+  name:             Generate Response file for Http installation
+  template:
+    src:            "{{ __tpl_file }}"
+    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
+    mode:           '0755'
+- 
+  name:             Installing IBM HTTP Server and Plugins
+  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
+  args:
+    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
 - 
   name:             Generate Response file for Plugin creation
   template:

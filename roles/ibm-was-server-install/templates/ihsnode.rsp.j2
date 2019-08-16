@@ -1,0 +1,4 @@
+AdminTask.createUnmanagedNode('[-nodeName ihsnode -hostName http.gbm.lab -nodeOperatingSystem linux]')
+AdminConfig.save()
+AdminTask.createWebServer('ihsnode', ['-name', 'webserver1',  '-serverConfig',[['80','/opt/ibm/HTTPServer', '/opt/ibm/WebSphere/Plugins']],  '-remoteServerConfig',  [['8008','ihsadmin','Tivoli01','HTTP']]]) 
+AdminConfig.save()
