@@ -1,16 +1,16 @@
 ---
 # tasks file for ibm-http-server-install
-- 
-  name:             Generate Response file for Http installation
-  template:
-    src:            "{{ __tpl_file }}"
-    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
-    mode:           '0755'
-- 
-  name:             Installing IBM HTTP Server and Plugins
-  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
-  args:
-    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
+#- 
+#  name:             Generate Response file for Http installation
+#  template:
+#    src:            "{{ __tpl_file }}"
+#    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
+#    mode:           '0755'
+#- 
+#  name:             Installing IBM HTTP Server and Plugins
+#  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
+#  args:
+#    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
 - 
   name:             Generate Response file for Plugin creation
   template:
@@ -21,4 +21,9 @@
   name:             Creating Plugin
   command:          './wctcmd.sh -tool pct -defLocPathname {{ __plugins_install_location }} -defLocName {{ __def_loc_name_plugin }} -response {{ __tmp_dir }}/{{ __plugin_rsp_file }}'
   args:
-    chdir:          '{{ __plugins_install_location }}/Toolbox/WCT/'
+    chdir:          '{{ __toolbox_install_location }}/WCT/'
+- 
+  name:             Start apache and admin
+  command:          './apachectl start && ./adminctl start'
+  args:
+    chdir:          '{{ __http_install_location }}/bin/'
