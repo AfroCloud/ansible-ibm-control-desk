@@ -12,3 +12,6 @@ repository_path = <path-where-your-installers-are>
 tmp_dir = <path-shared-between-servers>
 red_hat_username = red-hat-username
 red_hat_password = red-hat-password
+ihs_hostname = ihs-hostname
+db2_hostname = db2-hostname
+was_hostname = was-hostname

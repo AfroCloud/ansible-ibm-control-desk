@@ -129,7 +129,7 @@ Database.DB2.DatabaseName=maxdb76
 # Fully qualified host name of host that will be used to   #
 # access the database                                      #
 ############################################################
-Database.DB2.ServerHostName=db2.gbm.lab
+Database.DB2.ServerHostName={{ __db2_server_hostname }}
 
 ############################################################
 # Instance port number for database connections            #
@@ -400,7 +400,7 @@ WAS.SOAPConnectorPort=8879
 # Host name of the system running WebSphere                #
 # Application Server Deployment Manager                    #
 ############################################################
-WAS.DeploymentManagerHostName=app01.gbm.lab
+WAS.DeploymentManagerHostName= {{ __was_server_hostname }}
 
 ############################################################
 # Administrative user for WebSphere Application Server     #
@@ -443,7 +443,7 @@ WAS.NodeName=ctgNode01
 # Fully qualified host name where the HTTP Server is located # 
 #                                                            #
 ##############################################################
-WAS.WebServerHostName=http.gbm.lab
+WAS.WebServerHostName={{ __ihs_server_hostname }}
 
 ############################################################
 # The name of the webserver object in the WebSphere        #
