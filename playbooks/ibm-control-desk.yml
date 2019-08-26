@@ -1,5 +1,5 @@
 ---
-- name:                     Install IBM Control Desk
+- name:                     Copy installers
   hosts:                    app_server1
   roles:
     - roles/copy-installers

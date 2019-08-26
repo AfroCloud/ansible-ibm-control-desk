@@ -6,7 +6,7 @@
     src:            "{{ __tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
 - 
-  name:             Installing IBM Control Desk
+  name:             Install IBM Control Desk
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log icdfile -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
@@ -16,7 +16,7 @@
     src:            "{{ __cfg_tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __cfg_file }}"
 - 
-  name:             Building IBM Control Desk for WAS
+  name:             Build IBM Control Desk for WAS
   command:          './reconfigurePae.sh -action deployConfiguration -inputfile {{ __tmp_dir }}/{{ __cfg_file }} -dbvendor DB2 -j2eevendor WebSphere -automatedbconfig -automatej2eeconfig -buildears'
   args:
     chdir:          '{{ __smp_install_location }}/ConfigTool/scripts/'
@@ -32,7 +32,7 @@
     src:            "{{ __dpl_tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __dpl_file }}"
 -
-  name:             Deploying IBM Control Desk on WAS
+  name:             Deploy IBM Control Desk on WAS
   command:          './wsadmin.sh -f {{ __tmp_dir }}/{{ __dpl_file }} -lang jython -user wasadmin -password Tivoli01'
   args:
     chdir:          '{{ __was_install_location}}/bin/'

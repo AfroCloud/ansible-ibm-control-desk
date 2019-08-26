@@ -35,7 +35,7 @@
     dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
     mode:           '0755'
 - 
-  name:             Installing IBM WAS Server
+  name:             Install IBM WAS Server
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log wasfile -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
@@ -46,7 +46,7 @@
     dest:           "{{ __tmp_dir }}/{{ __cfg_rsp_file }}"
     mode:           '0755'
 - 
-  name:             WAS configuration 
+  name:             Configurate WAS Server
   command:          './reconfigurePae.sh -action deployMiddlewareConfiguration -inputfile {{ __tmp_dir }}/{{ __cfg_rsp_file }}'
   args:
     chdir:          "{{ __smp_install_location }}/ConfigTool/scripts/"
@@ -57,7 +57,7 @@
     dest:           "{{ __tmp_dir }}/{{ __ihs_file }}"
     mode:           '0755'
 -
-  name:             Creating ihsnode
+  name:             Create ihsnode
   command:          './wsadmin.sh -f {{ __tmp_dir }}/{{ __ihs_file }} -lang jython -user wasadmin -password Tivoli01'
   args:
     chdir:          '{{ __was_install_location}}/bin/'
