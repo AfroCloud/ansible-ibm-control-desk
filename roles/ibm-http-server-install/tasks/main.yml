@@ -23,7 +23,12 @@
   args:
     chdir:          '{{ __toolbox_install_location }}/WCT/'
 - 
-  name:             Start apache and admin
-  command:          './apachectl start && ./adminctl start'
+  name:             Start apache service
+  command:          './apachectl start'
+  args:
+    chdir:          '{{ __http_install_location }}/bin/'
+- 
+  name:             Start admin service
+  command:          './adminctl start'
   args:
     chdir:          '{{ __http_install_location }}/bin/'
