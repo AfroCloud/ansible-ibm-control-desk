@@ -3,8 +3,9 @@
 - name:             Disable SELinux
   selinux:
     state:          disabled
-- 
-  name:             Insert data to ulimit
+  register:         selinux
+
+- name:             Insert data to ulimit
   blockinfile:
     path:           /etc/security/limits.conf 
     block: |
@@ -12,17 +13,25 @@
       *         soft    nofile      999999
       root      hard    nofile      999999
       root      soft    nofile      999999
-- 
-  name:             Reboot to apply changes
+  register:         ulimit
+
+- name:             Reboot to apply changes
   reboot:
-- 
-  name:             Generate Response file
+  when:             selinux.changed and ulimit.changed
+
+- name:             Generate response file
   template:
     src:            "{{ __tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
     mode:           '0755'
-- 
-  name:             Install IBM DB2
+
+- name:             Is db2 already installed?
+  command:          "egrep {{ __product_id }} /var/ibm/InstallationManager/installed.xml"
+  register:         db2_already_installed
+  ignore_errors:    true
+
+- name:             Install IBM DB2
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log db2file -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
+  when:             db2_already_installed.rc != 0

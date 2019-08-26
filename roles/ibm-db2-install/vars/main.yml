@@ -6,3 +6,4 @@ __db2_install_location:         "{{ db2_install_location  | default('/opt/ibm/db
 __tpl_file:                     "installDB2_product.rsp.j2"
 __rsp_file:                     "installDB2_product.xml"
 __iim_install_location:         "{{ iim_install_location  | default('/opt/ibm/InstallationManager') }}"
+__product_id:                   "\"id='com.ibm.tivoli.pae.db2'\""
