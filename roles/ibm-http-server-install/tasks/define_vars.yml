@@ -1,0 +1,12 @@
+---
+- name:             Is ihs already installed?
+  command:          "egrep {{ __product_id }} /var/ibm/InstallationManager/installed.xml"
+  register:         ihs_already_installed
+  ignore_errors:    true
+
+- name:             Is plugin already created?
+  command:          "./wctcmd.sh -tool pct -listDefinitionLocations"
+  args:
+    chdir:          '{{ __toolbox_install_location }}/WCT/'
+  register:         plugin_already_created
+  ignore_errors:    true

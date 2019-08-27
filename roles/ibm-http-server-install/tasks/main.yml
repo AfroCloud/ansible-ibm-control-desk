@@ -1,34 +1,38 @@
 ---
 # tasks file for ibm-http-server-install
-- 
-  name:             Generate Response file for Http installation
+- name:             Define vars
+  include_tasks:    define_vars.yml
+
+- name:             Generate response file for Http installation
   template:
     src:            "{{ __tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
     mode:           '0755'
-- 
-  name:             Install IBM HTTP Server and Plugins
+
+- name:             Install IBM HTTP Server and Plugins
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
-- 
-  name:             Generate Response file for Plugin creation
+  when:             ihs_already_installed.rc != 0
+
+- name:             Generate response file for plugin creation
   template:
     src:            "{{ __plugin_tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __plugin_rsp_file }}"
     mode:           '0755'
-- 
-  name:             Create Plugin
+
+- name:             Create plugin
   command:          './wctcmd.sh -tool pct -defLocPathname {{ __plugins_install_location }} -defLocName {{ __def_loc_name_plugin }} -response {{ __tmp_dir }}/{{ __plugin_rsp_file }}'
   args:
     chdir:          '{{ __toolbox_install_location }}/WCT/'
-- 
-  name:             Start apache service
+  when:             plugin_already_created.stdout.find("WAS9.0") == -1
+
+- name:             Start apache service
   command:          './apachectl start'
   args:
     chdir:          '{{ __http_install_location }}/bin/'
-- 
-  name:             Start admin service
+
+- name:             Start admin service
   command:          './adminctl start'
   args:
     chdir:          '{{ __http_install_location }}/bin/'
