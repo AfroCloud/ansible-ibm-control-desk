@@ -13,7 +13,7 @@
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
-  when:             ihs_already_installed.rc != 0
+  when:             ihs_already_installed.rc == -1
 
 - name:             Generate response file for plugin creation
   template:

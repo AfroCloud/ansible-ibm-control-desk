@@ -3,8 +3,8 @@
 - name:             Disable SELinux
   selinux:
     state:          disabled
-- 
-  name:             Insert data to ulimit
+
+- name:             Insert data to ulimit
   blockinfile:
     path:           /etc/security/limits.conf 
     block: |
@@ -12,11 +12,11 @@
       *         soft    nofile      999999
       root      hard    nofile      999999
       root      soft    nofile      999999
-- 
-  name:             Reboot to apply changes
+
+- name:             Reboot to apply changes
   reboot:
-- 
-  name:             Install prerequisites
+
+- name:             Install prerequisites
   yum:
     name:           "{{ item }}"
     state:          latest
@@ -28,41 +28,41 @@
     - 'libgcc.x86_64'
     - 'libgcc.i686'
     - 'ksh'
-- 
-  name:             Generate Response file
+    
+- name:             Generate Response file
   template:
     src:            "{{ __tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
     mode:           '0755'
-- 
-  name:             Install IBM WAS Server
+
+- name:             Install IBM WAS Server
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log wasfile -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
-- 
-  name:             Generate Response file for WAS configuration
+
+- name:             Generate Response file for WAS configuration
   template:
     src:            "{{ __cfg_tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __cfg_rsp_file }}"
     mode:           '0755'
-- 
-  name:             Configurate WAS Server
+
+- name:             Configurate WAS Server
   command:          './reconfigurePae.sh -action deployMiddlewareConfiguration -inputfile {{ __tmp_dir }}/{{ __cfg_rsp_file }}'
   args:
     chdir:          "{{ __smp_install_location }}/ConfigTool/scripts/"
-- 
-  name:             Generate Response file for ihsnode
+
+- name:             Generate Response file for ihsnode
   template:
     src:            "{{ __ihs_tpl_file }}"
     dest:           "{{ __tmp_dir }}/{{ __ihs_file }}"
     mode:           '0755'
--
-  name:             Create ihsnode
+
+- name:             Create ihsnode
   command:          './wsadmin.sh -f {{ __tmp_dir }}/{{ __ihs_file }} -lang jython -user wasadmin -password Tivoli01'
   args:
     chdir:          '{{ __was_install_location}}/bin/'
--
-  name:             Generate and propagate plugin
+
+- name:             Generate and propagate plugin
   command:          './GenPluginCfg.sh -node.name ihsnode -webserver.name webserver1 -propagate yes'
   args:
     chdir:          '{{ __was_install_location}}/bin/'
