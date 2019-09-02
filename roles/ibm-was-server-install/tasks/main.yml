@@ -9,6 +9,14 @@
   - Restart firewalld
   tags:
   - ports
+  
+- name:             Insert hosts
+  blockinfile:
+    path:           /etc/hosts
+    block: |
+      {{ __ihs_ip }}         {{ __ihs_hostname }}
+      {{ __db2_ip }}         {{ __db2_hostname }}
+      {{ __was_ip }}         {{ __was_hostname }}
 
 - name:             Disable SELinux
   selinux:

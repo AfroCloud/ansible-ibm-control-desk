@@ -15,3 +15,6 @@ red_hat_password = red-hat-password
 ihs_hostname = ihs-hostname
 db2_hostname = db2-hostname
 was_hostname = was-hostname
+ihs_ip = ihs-ip
+db2_ip = db2-ip
+was_ip = was-ip
