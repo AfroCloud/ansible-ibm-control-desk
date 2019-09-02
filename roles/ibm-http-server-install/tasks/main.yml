@@ -1,5 +1,25 @@
 ---
 # tasks file for ibm-http-server-install
+- name:             Open http port
+  firewalld:
+    port:           80/tcp
+    permanent:      true
+    state:          enabled
+  notify:
+  - Restart firewalld
+  tags:
+  - ports
+
+- name:             Open 8008 port
+  firewalld:
+    port:           8008/tcp
+    permanent:      true
+    state:          enabled
+  notify:
+  - Restart firewalld
+  tags:
+  - ports
+
 - name:             Define vars
   include_tasks:    define_vars.yml
 
