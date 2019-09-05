@@ -1,5 +1,8 @@
 ---
 # tasks file for ibm-http-server-install
+- name:             Define vars
+  include_tasks:    define_vars.yml
+
 - name:             Open http port
   firewalld:
     port:           80/tcp
@@ -20,16 +23,16 @@
   tags:
   - ports
 
-- name:             Define vars
-  include_tasks:    define_vars.yml
+  - hostname:
+    name:           {{ __ihs_server_hostname }}
 
 - name:             Insert hosts
   blockinfile:
     path:           /etc/hosts
     block: |
-      {{ __ihs_ip }}         {{ __ihs_hostname }}
-      {{ __db2_ip }}         {{ __db2_hostname }}
-      {{ __was_ip }}         {{ __was_hostname }}
+      {{ __ihs_ip }}         {{ __ihs_server_hostname }}
+      {{ __db2_ip }}         {{ __db2_server_hostname }}
+      {{ __was_ip }}         {{ __was_server_hostname }}
 
 - name:             Generate response file for Http installation
   template:
@@ -41,7 +44,7 @@
   command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
   args:
     chdir:          '{{ __iim_install_location }}/eclipse/tools/'
-  when:             ihs_already_installed.rc == -1
+  when:             ihs_already_installed.rc != 0
 
 - name:             Generate response file for plugin creation
   template:
