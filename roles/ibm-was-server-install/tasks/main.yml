@@ -10,8 +10,10 @@
   tags:
   - ports
 
-  - hostname:
-    name:           {{ __was_server_hostname }}
+
+- name:           Set server hostname 
+  hostname:
+    name:           "{{ __was_server_hostname }}"
   
 - name:             Insert hosts
   blockinfile:

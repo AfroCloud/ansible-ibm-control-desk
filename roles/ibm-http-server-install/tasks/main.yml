@@ -23,8 +23,9 @@
   tags:
   - ports
 
-  - hostname:
-    name:           {{ __ihs_server_hostname }}
+- name:           Set server hostname 
+  hostname:
+    name:           "{{ __ihs_server_hostname }}"
 
 - name:             Insert hosts
   blockinfile:

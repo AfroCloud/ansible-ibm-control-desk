@@ -10,8 +10,11 @@
   tags:
   - ports
 
-  - hostname:
-    name:           {{ __db2_server_hostname }}
+- name:           Set server hostname
+  hostname:
+    name:           "{{ __db2_server_hostname }}"
+  tags:
+  - hostname
 
 - name:             Disable SELinux
   selinux:
