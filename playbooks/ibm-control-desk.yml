@@ -3,25 +3,23 @@
   hosts:                    app_server1
   roles:
     - roles/copy-installers
+  gather_facts:             no
 
 - name:                     Install IBM DB2
   hosts:                    db_server
   roles:
-    - roles/red-hat-registration
     - roles/installation-manager-install
     - roles/ibm-db2-install
 
 - name:                     Install HTTP Server and Plugins
   hosts:                    web_server
   roles:
-    - roles/red-hat-registration
     - roles/installation-manager-install
     - roles/ibm-http-server-install
 
 - name:                     Install WAS Server
   hosts:                    app_server1
   roles:
-    - roles/red-hat-registration
     - roles/installation-manager-install
     - roles/ibm-was-server-install
 

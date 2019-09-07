@@ -1,48 +1,54 @@
 ---
 # tasks file for ibm-was-server-install
-- name:             Open 9080 port
+- name:                 Set server hostname 
+  hostname:
+    name:               "{{ __was_server_hostname }}"
+
+- name:                 Register Red Hat
+  redhat_subscription:
+    state:              present
+    username:           '{{ __red_hat_username }}'
+    password:           '{{ __red_hat_password }}'
+    auto_attach:        true
+
+- name:                 Open 9080 port
   firewalld:
-    port:           9080/tcp
-    permanent:      true
-    state:          enabled
+    port:               9080/tcp
+    permanent:          true
+    state:              enabled
   notify:
   - Restart firewalld
   tags:
   - ports
 
-
-- name:           Set server hostname 
-  hostname:
-    name:           "{{ __was_server_hostname }}"
-  
-- name:             Insert hosts
+- name:                 Insert hosts
   blockinfile:
-    path:           /etc/hosts
+    path:               /etc/hosts
     block: |
       {{ __ihs_ip }}         {{ __ihs_server_hostname }}
       {{ __db2_ip }}         {{ __db2_server_hostname }}
       {{ __was_ip }}         {{ __was_server_hostname }}
 
-- name:             Disable SELinux
+- name:                 Disable SELinux
   selinux:
-    state:          disabled
+    state:              disabled
 
-- name:             Insert data to ulimit
+- name:                 Insert data to ulimit
   blockinfile:
-    path:           /etc/security/limits.conf 
+    path:               /etc/security/limits.conf 
     block: |
       *         hard    nofile      999999
       *         soft    nofile      999999
       root      hard    nofile      999999
       root      soft    nofile      999999
 
-- name:             Reboot to apply changes
+- name:                 Reboot to apply changes
   reboot:
 
-- name:             Install prerequisites
+- name:                 Install prerequisites
   yum:
-    name:           "{{ item }}"
-    state:          latest
+    name:               "{{ item }}"
+    state:              latest
   loop:
     - 'nss-softokn-freebl.x86_64'
     - 'nss-softokn-freebl.i686'
@@ -52,40 +58,40 @@
     - 'libgcc.i686'
     - 'ksh'
     
-- name:             Generate Response file
+- name:                 Generate Response file
   template:
-    src:            "{{ __tpl_file }}"
-    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
-    mode:           '0755'
+    src:                "{{ __tpl_file }}"
+    dest:               "{{ __tmp_dir }}/{{ __rsp_file }}"
+    mode:               '0755'
 
-- name:             Install IBM WAS Server
-  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log wasfile -acceptLicense'
+- name:                 Install IBM WAS Server
+  command:              './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log wasfile -acceptLicense'
   args:
-    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
+    chdir:              '{{ __iim_install_location }}/eclipse/tools/'
 
-- name:             Generate Response file for WAS configuration
+- name:                 Generate Response file for WAS configuration
   template:
-    src:            "{{ __cfg_tpl_file }}"
-    dest:           "{{ __tmp_dir }}/{{ __cfg_rsp_file }}"
-    mode:           '0755'
+    src:                "{{ __cfg_tpl_file }}"
+    dest:               "{{ __tmp_dir }}/{{ __cfg_rsp_file }}"
+    mode:               '0755'
 
-- name:             Configurate WAS Server
-  command:          './reconfigurePae.sh -action deployMiddlewareConfiguration -inputfile {{ __tmp_dir }}/{{ __cfg_rsp_file }}'
+- name:                 Configurate WAS Server
+  command:              './reconfigurePae.sh -action deployMiddlewareConfiguration -inputfile {{ __tmp_dir }}/{{ __cfg_rsp_file }}'
   args:
-    chdir:          "{{ __smp_install_location }}/ConfigTool/scripts/"
+    chdir:              "{{ __smp_install_location }}/ConfigTool/scripts/"
 
-- name:             Generate Response file for ihsnode
+- name:                 Generate Response file for ihsnode
   template:
-    src:            "{{ __ihs_tpl_file }}"
-    dest:           "{{ __tmp_dir }}/{{ __ihs_file }}"
-    mode:           '0755'
+    src:                "{{ __ihs_tpl_file }}"
+    dest:               "{{ __tmp_dir }}/{{ __ihs_file }}"
+    mode:               '0755'
 
-- name:             Create ihsnode
-  command:          './wsadmin.sh -f {{ __tmp_dir }}/{{ __ihs_file }} -lang jython -user wasadmin -password Tivoli01'
+- name:                 Create ihsnode
+  command:              './wsadmin.sh -f {{ __tmp_dir }}/{{ __ihs_file }} -lang jython -user wasadmin -password Tivoli01'
   args:
-    chdir:          '{{ __was_install_location}}/bin/'
+    chdir:              '{{ __was_install_location}}/bin/'
 
-- name:             Generate and propagate plugin
-  command:          './GenPluginCfg.sh -node.name ihsnode -webserver.name webserver1 -propagate yes'
+- name:                 Generate and propagate plugin
+  command:              './GenPluginCfg.sh -node.name ihsnode -webserver.name webserver1 -propagate yes'
   args:
-    chdir:          '{{ __was_install_location}}/bin/'
+    chdir:              '{{ __was_install_location}}/bin/'

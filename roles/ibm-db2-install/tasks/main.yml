@@ -1,61 +1,68 @@
 ---
 # tasks file for ibm-db2-install
-- name:             Open 50005 port
+- name:                 Set server hostname
+  hostname:
+    name:               "{{ __db2_server_hostname }}"
+  tags:
+  - hostname
+  
+- name:                 Register Red Hat
+  redhat_subscription:
+    state:              present
+    username:           '{{ __red_hat_username }}'
+    password:           '{{ __red_hat_password }}'
+    auto_attach:        true
+
+- name:                 Open 50005 port
   firewalld:
-    port:           50005/tcp
-    permanent:      true
-    state:          enabled
+    port:               50005/tcp
+    permanent:          true
+    state:              enabled
   notify:
   - Restart firewalld
   tags:
   - ports
 
-- name:           Set server hostname
-  hostname:
-    name:           "{{ __db2_server_hostname }}"
-  tags:
-  - hostname
-
-- name:             Disable SELinux
+- name:                 Disable SELinux
   selinux:
-    state:          disabled
-  register:         selinux
+    state:              disabled
+  register:             selinux
 
-- name:             Insert hosts
+- name:                 Insert hosts
   blockinfile:
-    path:           /etc/hosts
+    path:               /etc/hosts
     block: |
       {{ __ihs_ip }}         {{ __ihs_server_hostname }}
       {{ __db2_ip }}         {{ __db2_server_hostname }}
       {{ __was_ip }}         {{ __was_server_hostname }}
 
-- name:             Insert data to ulimit
+- name:                 Insert data to ulimit
   blockinfile:
-    path:           /etc/security/limits.conf 
+    path:               /etc/security/limits.conf 
     block: |
       *         hard    nofile      999999
       *         soft    nofile      999999
       root      hard    nofile      999999
       root      soft    nofile      999999
-  register:         ulimit
+  register:             ulimit
 
-- name:             Reboot to apply changes
+- name:                 Reboot to apply changes
   reboot:
-  when:             selinux.changed and ulimit.changed
+  when:                 selinux.changed and ulimit.changed
 
-- name:             Generate response file
+- name:                 Generate response file
   template:
-    src:            "{{ __tpl_file }}"
-    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
-    mode:           '0755'
+    src:                "{{ __tpl_file }}"
+    dest:               "{{ __tmp_dir }}/{{ __rsp_file }}"
+    mode:               '0755'
 
-- name:             Is db2 already installed?
-  command:          "egrep {{ __product_id }} /var/ibm/InstallationManager/installed.xml"
-  register:         db2_already_installed
-  ignore_errors:    true
+- name:                 Is db2 already installed?
+  command:              "egrep {{ __product_id }} /var/ibm/InstallationManager/installed.xml"
+  register:             db2_already_installed
+  ignore_errors:        true
 
-- name:             Install IBM DB2
-  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log db2file -acceptLicense'
+- name:                 Install IBM DB2
+  command:              './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log db2file -acceptLicense'
   args:
-    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
-  when:             db2_already_installed.rc != 0
+    chdir:              '{{ __iim_install_location }}/eclipse/tools/'
+  when:                 db2_already_installed.rc != 0

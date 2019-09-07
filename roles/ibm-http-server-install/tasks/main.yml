@@ -1,70 +1,80 @@
 ---
 # tasks file for ibm-http-server-install
-- name:             Define vars
-  include_tasks:    define_vars.yml
+- name:                 Define vars
+  include_tasks:        define_vars.yml
 
-- name:             Open http port
-  firewalld:
-    port:           80/tcp
-    permanent:      true
-    state:          enabled
-  notify:
-  - Restart firewalld
-  tags:
-  - ports
-
-- name:             Open 8008 port
-  firewalld:
-    port:           8008/tcp
-    permanent:      true
-    state:          enabled
-  notify:
-  - Restart firewalld
-  tags:
-  - ports
-
-- name:           Set server hostname 
+- name:                 Set server hostname 
   hostname:
-    name:           "{{ __ihs_server_hostname }}"
+    name:               "{{ __ihs_server_hostname }}"
+  
+- name:                 Register Red Hat
+  redhat_subscription:
+    state:              present
+    username:           '{{ __red_hat_username }}'
+    password:           '{{ __red_hat_password }}'
+    auto_attach:        true
 
-- name:             Insert hosts
+- name:                 Open http port
+  firewalld:
+    port:               80/tcp
+    permanent:          true
+    state:              enabled
+  notify:
+  - Restart firewalld
+  tags:
+  - ports
+
+- name:                 Open 8008 port
+  firewalld:
+    port:               8008/tcp
+    permanent:          true
+    state:              enabled
+  notify:
+  - Restart firewalld
+  tags:
+  - ports
+
+- name:                 Insert hosts
   blockinfile:
-    path:           /etc/hosts
+    path:               /etc/hosts
     block: |
       {{ __ihs_ip }}         {{ __ihs_server_hostname }}
       {{ __db2_ip }}         {{ __db2_server_hostname }}
       {{ __was_ip }}         {{ __was_server_hostname }}
 
-- name:             Generate response file for Http installation
+- name:                 Generate response file for Http installation
   template:
-    src:            "{{ __tpl_file }}"
-    dest:           "{{ __tmp_dir }}/{{ __rsp_file }}"
-    mode:           '0755'
+    src:                "{{ __tpl_file }}"
+    dest:               "{{ __tmp_dir }}/{{ __rsp_file }}"
+    mode:               '0755'
 
-- name:             Install IBM HTTP Server and Plugins
-  command:          './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
+- name:                 Install IBM HTTP Server and Plugins
+  command:              './imcl -input {{ __tmp_dir }}/{{ __rsp_file }} -log httpfile -acceptLicense'
   args:
-    chdir:          '{{ __iim_install_location }}/eclipse/tools/'
-  when:             ihs_already_installed.rc != 0
+    chdir:              '{{ __iim_install_location }}/eclipse/tools/'
+  when:                 ihs_already_installed.rc != 0
 
-- name:             Generate response file for plugin creation
+- name:                 Generate response file for plugin creation
   template:
-    src:            "{{ __plugin_tpl_file }}"
-    dest:           "{{ __tmp_dir }}/{{ __plugin_rsp_file }}"
-    mode:           '0755'
+    src:                "{{ __plugin_tpl_file }}"
+    dest:               "{{ __tmp_dir }}/{{ __plugin_rsp_file }}"
+    mode:               '0755'
 
-- name:             Create plugin
-  command:          './wctcmd.sh -tool pct -defLocPathname {{ __plugins_install_location }} -defLocName {{ __def_loc_name_plugin }} -response {{ __tmp_dir }}/{{ __plugin_rsp_file }}'
-  args:
-    chdir:          '{{ __toolbox_install_location }}/WCT/'
-  when:             plugin_already_created.stdout.find("WAS9.0") == -1
+- debug:
+    msg: plugin_already_created.stdout.find("WAS9.0") and plugin_already_created.stdout.rc
 
-- name:             Start apache service
-  command:          './apachectl start'
+- name:                 Create plugin
+  command:              './wctcmd.sh -tool pct -defLocPathname {{ __plugins_install_location }} -defLocName {{ __def_loc_name_plugin }} -response {{ __tmp_dir }}/{{ __plugin_rsp_file }}'
   args:
-    chdir:          '{{ __http_install_location }}/bin/'
+    chdir:              '{{ __toolbox_install_location }}/WCT/'
+  when:                 plugin_already_created.rc != 0
 
-- name:             Start admin service
-  command:          './adminctl start'
+- name:                 Start apache service
+  command:              './apachectl start'
   args:
-    chdir:          '{{ __http_install_location }}/bin/'
+    chdir:              '{{ __http_install_location }}/bin/'
+
+- name:                 Start admin service
+  command:              './adminctl start'
+  args:
+    chdir:              '{{ __http_install_location }}/bin/'
